@@ -76,6 +76,7 @@ import {
   getRoutesManifest,
   getSourceFilePathFromPage,
   getStaticFiles,
+  getVariantsManifest,
   isDynamicRoute,
   localizeDynamicRoutes,
   normalizeIndexOutput,
@@ -494,6 +495,13 @@ export const build: BuildV2 = async ({
     entryPath,
     outputDirectory
   );
+
+  const variantsManifest = await getVariantsManifest(
+    entryPath,
+    outputDirectory
+  );
+
+  console.log('DEBUG', 'Next.js builder variants manifest', variantsManifest);
 
   const routesManifest = await getRoutesManifest(
     entryPath,
@@ -1368,6 +1376,7 @@ export const build: BuildV2 = async ({
         privateOutputs,
         hasIsr404Page,
         hasIsr500Page,
+        variantsManifest,
       });
     }
 
